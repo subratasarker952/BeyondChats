@@ -1,5 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../Common/Sidebar";
+import { FaSearch } from "react-icons/fa";
+import ChatList from "../Common/ChatList";
 
 const Navbar = () => {
   return (
@@ -8,7 +10,7 @@ const Navbar = () => {
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
           {/* Navbar */}
-          <div className="navbar bg-base-300 w-full">
+          <div className="navbar bg-base-300 w-full  sticky top-0">
             <div className="flex-none lg:hidden">
               <label
                 htmlFor="my-drawer-3"
@@ -34,17 +36,15 @@ const Navbar = () => {
             <div className="hidden flex-none lg:block">
               <ul className="menu menu-horizontal">
                 {/* Navbar menu content here */}
-                <li>
-                  <a>Navbar Item 1</a>
-                </li>
-                <li>
-                  <a>Navbar Item 2</a>
-                </li>
+                {/* <FaSearch /> */}
               </ul>
             </div>
           </div>
           {/* Page content here */}
-          <Outlet />
+          <div>
+            <ChatList/>
+            <Outlet />
+          </div>
         </div>
         <div className="drawer-side">
           <label
@@ -52,9 +52,9 @@ const Navbar = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <div className="menu bg-gray-800 text-white min-h-full w-80 p-4">
+          <div className="menu bg-gray-800 text-white min-h-full w-80">
             {/* Sidebar content here */}
-             <Sidebar />
+            <Sidebar />
           </div>
         </div>
       </div>
