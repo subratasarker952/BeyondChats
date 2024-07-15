@@ -1,56 +1,40 @@
-import { useEffect } from "react";
-import { useState } from "react";
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const ChatList = () => {
-  const [chats, setChats] = useState(null);
+  const [allData, setAllData] = useState({});
+  const [chats, setChats] = useState([]);
+  // console.log(allData)
+
   useEffect(() => {
-    fetch('https://devapi.beyondchats.com/api/get_all_chats?page=1')
-    .then((response) => response.json())
-    .then((json) => setChats(json));
-  }, [chats]);
-  console.log(chats)
+    const fetchChats = async () => {
+      try {
+        const response = await axios.get('https://devapi.beyondchats.com/api/get_all_chats');
+        setAllData(response.data.data); 
+        setChats(response.data.data.data); 
+      } catch (error) {
+        console.error('Error fetching chats:', error);
+      }
+    };
+
+    fetchChats();
+  }, []);
+
   return (
-    <div>
-      {/* <h2>Chats fetched successfully!</h2>
-      <p>Status: {chats?.status}</p>
-      <p>Status Code: {chats?.status_code}</p>
-      <p>Message: {chats?.message}</p> */}
-      <div>
-        {/* <h3>
-          Chats (Page {chats?.data.current_page} of {chats?.data.last_page})
-        </h3> */}
-        <ul>
-          {chats?.data.data.map((chat) => (
-            <li key={chat.id}>
-              {/* <h4>Chat ID: {chat.id}</h4>
-              <p>Status: {chat.status}</p>
-              <p>Message Count: {chat.msg_count}</p>
-              <p>Created At: {chat.created_at}</p>
-              <p>Updated At: {chat.updated_at}</p> */}
-              <div>
-                <p>Name: {chat.creator.name || "N/A"}</p>
-                <p>Email: {chat.creator.email}</p>
-                <p>Phone: {chat.creator.phone || "N/A"}</p>
-                {/* <p>Device: {chat.creator.device}</p>
-                <p>Browser: {chat.creator.browser}</p>
-                <p>OS: {chat.creator.os}</p>
-                <p>City: {chat.creator.city}</p>
-                <p>Country: {chat.creator.country.name}</p> */}
-              </div>
-            </li>
-          ))}
-        </ul>
-        <div>
-          <a href={chats?.data.first_page_url}>First Page</a>
-          {chats?.data.links.map((link) => (
-            <a key={link.label} href={link.url} style={{ margin: "0 5px" }}>
-              {link.label}
-            </a>
-          ))}
-          <a href={chats?.data.last_page_url}>Last Page</a>
-        </div>
+    <div className="container mx-auto p-4">
+      <h1 className="text-2xl font-bold mb-4">Chats</h1>
+      <div className="grid grid-cols-1 gap-4">
+        {chats.map((chat) => (
+          <div key={chat.id} className="p-4 bg-white rounded shadow">
+            <h2 className="text-xl font-semibold">{chat.creator.name || chat.creator.email}</h2>
+            <p className="text-gray-600">Messages: {chat.msg_count}</p>
+            <p className="text-gray-600">Status: {chat.status}</p>
+            <p className="text-gray-600">Last Updated: {new Date(chat.updated_at).toLocaleString()}</p>
+          </div>
+        ))}
       </div>
     </div>
   );
 };
-export default ChatList
+
+export default ChatList;
