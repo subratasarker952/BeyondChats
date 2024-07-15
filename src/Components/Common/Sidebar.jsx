@@ -1,6 +1,7 @@
 import {
   FaChevronDown,
   FaChevronUp,
+  FaEnvelope,
   FaPhone,
   FaQuestion,
   FaRegUserCircle,
@@ -79,6 +80,15 @@ const Sidebar = () => {
           </span>
           My Profile
         </Link>
+        <Link
+          className="flex justify-start mt-3 text-xl items-center"
+          to={"/messages"}
+        >
+          <span className="p-2">
+            <FaEnvelope />
+          </span>
+          Messages
+        </Link>
 
         <Link
           className="flex justify-start mt-3 text-xl items-center"
@@ -127,7 +137,7 @@ const Sidebar = () => {
         </Link>
         <Link
           className="flex justify-start mt-3 text-xl items-center"
-          to={"/setting"}
+          to={"/settings"}
         >
           <span className="p-2">
             <IoSettings />

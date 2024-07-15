@@ -9,12 +9,22 @@ import NewGroup from "../Pages/NewGroup";
 import PeopleNearby from "../Pages/PeopleNearby";
 import SendMessages from "../Pages/SendMessages";
 import Settings from "../Pages/Settings";
+import MainLayout from "../Layouts/MainLayout";
+import Messages from "../Pages/Messages";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: <MainLayout />,
     children: [
+      {
+        path: "",
+        element: <Messages />,
+      },
+      {
+        path: "/messages",
+        element: <Messages />,
+      },
       {
         path: "/profile",
         element: <Profile />,
