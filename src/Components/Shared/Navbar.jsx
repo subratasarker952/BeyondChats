@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom";
 import Sidebar from "../Common/Sidebar";
 import { FaSearch } from "react-icons/fa";
 import ChatList from "../Common/ChatList";
+import ChatWindow from "../Common/ChatWindow";
 
 const Navbar = () => {
   return (
@@ -34,16 +35,17 @@ const Navbar = () => {
             </div>
             <div className="mx-2 flex-1 px-2 font-bold">Telegram</div>
             <div className="hidden flex-none lg:block">
-              <ul className="menu menu-horizontal">
-                {/* Navbar menu content here */}
-                {/* <FaSearch /> */}
-              </ul>
+              <ul className="menu menu-horizontal"></ul>
             </div>
           </div>
           {/* Page content here */}
-          <div>
-            <ChatList/>
-            <Outlet />
+          <div className="w-full flex min-h-screen">
+            <div className="">
+            <ChatWindow chatId={3888} />
+            </div>
+            <div className="">
+              <Outlet />
+            </div>
           </div>
         </div>
         <div className="drawer-side">

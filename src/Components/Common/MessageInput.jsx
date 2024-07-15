@@ -1,26 +1,29 @@
 import { useState } from "react";
 
-const MessageInput = ({ onSend }) => {
-    const [message, setMessage] = useState('');
-  
-    const handleSend = () => {
-      onSend(message);
+const MessageInput = () => {
+  const [message, setMessage] = useState('');
+
+  const handleSend = () => {
+    if (message.trim()) {
+      // Logic to send message
+      console.log('Sending message:', message);
       setMessage('');
-    };
-  
-    return (
-      <div className="p-4 flex">
-        <input
-          type="text"
-          className="flex-1 p-2 border rounded"
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
-        <button onClick={handleSend} className="ml-4 py-2 px-4 bg-blue-500 text-white rounded">
-          Send
-        </button>
-      </div>
-    );
+    }
   };
-  
-  export default MessageInput;
+
+  return (
+    <div className="flex mt-4">
+      <input
+        type="text"
+        className="flex-1 p-2 border rounded-l-lg focus:outline-none"
+        value={message}
+        onChange={(e) => setMessage(e.target.value)}
+      />
+      <button onClick={handleSend} className="p-2 bg-blue-500 text-white rounded-r-lg">
+        Send
+      </button>
+    </div>
+  );
+};
+
+export default MessageInput;

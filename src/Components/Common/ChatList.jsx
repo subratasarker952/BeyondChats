@@ -7,8 +7,9 @@ const ChatList = () => {
     const fetchChats = async () => {
       try {
         const response = await axios.get(
-          "https://devapi.beyondchats.com/api/get_all_chats"
+          "https://devapi.beyondchats.com/api/get_chat_messages?chat_id=3888"
         );
+        console.log(response.data.data)
         setChats(response.data.data.data);
       } catch (error) {
         console.error("Error fetching chats:", error);
@@ -17,30 +18,32 @@ const ChatList = () => {
 
     fetchChats();
   }, []);
+  console.log(chats)
 
   return (
     <div className="container mx-auto p-4">
       <div className="grid grid-cols-1 gap-4">
-        {chats.map((chat) => (
+        {chats?.map((chat) => (
           <div key={chat.id} className="p-1 bg-white rounded shadow">
             <div className="flex gap-2">
               <div className="w-12 h-12 rounded-full bg-red-300 flex justify-center items-center">
                 <p>{chat?.creator?.name?.slice(0, 1)}</p>
               </div>
-              <div className="flex-1">
+              <div className="w-56">
                 <h2 className="font-semibold">
                   {chat.creator.name || chat.creator.email}
                 </h2>
-                <h2 className="font-semibold">
-                  Ther is a new massage
-                </h2>
+                <h2 className="font-semibold">This is last massage</h2>
               </div>
-              <div>
+              <div className="w-6">
                 <p className="text-gray-600">
-                  {/* Last Updated: {new Date(chat.updated_at).toLocaleString()} */}
-                  sun
+                  {new Date(chat.updated_at).toLocaleDateString()}
+          
                 </p>
-                <p className="text-gray-600 w-5 h-5 rounded-full text-white bg-slate-800 flex justify-center items-center"> {chat.msg_count}</p>
+                <p className=" w-5 h-5 rounded-full text-white bg-slate-800 flex justify-center items-center">
+                  {" "}
+                  {chat.msg_count}
+                </p>
               </div>
             </div>
           </div>
