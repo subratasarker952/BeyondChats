@@ -1,8 +1,5 @@
 import { Outlet } from "react-router-dom";
 import Sidebar from "../Common/Sidebar";
-import { FaSearch } from "react-icons/fa";
-import ChatList from "../Common/ChatList";
-import ChatWindow from "../Common/ChatWindow";
 
 const Navbar = () => {
   return (
@@ -11,7 +8,7 @@ const Navbar = () => {
         <input id="my-drawer-3" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col">
           {/* Navbar */}
-          <div className="navbar bg-base-300 w-full  sticky top-0">
+          <div className="navbar bg-base-300 w-full  sticky top-0 lg:hidden">
             <div className="flex-none lg:hidden">
               <label
                 htmlFor="my-drawer-3"
@@ -33,19 +30,17 @@ const Navbar = () => {
                 </svg>
               </label>
             </div>
-            <div className="mx-2 flex-1 px-2 font-bold">Telegram</div>
+            <div className="mx-2 flex-1 px-2 font-bold ">Telegram</div>
             <div className="hidden flex-none lg:block">
-              <ul className="menu menu-horizontal"></ul>
+              <ul className="menu menu-horizontal">
+                {/* Navbar menu content here */}
+       
+              </ul>
             </div>
           </div>
           {/* Page content here */}
-          <div className="w-full flex min-h-screen">
-            <div className="">
-            <ChatWindow chatId={3888} />
-            </div>
-            <div className="">
-              <Outlet />
-            </div>
+          <div className="hidden md:block">
+            <Outlet />
           </div>
         </div>
         <div className="drawer-side">
