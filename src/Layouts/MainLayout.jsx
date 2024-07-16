@@ -5,7 +5,7 @@ const MainLayout = () => {
   return (
     <>
       <Navbar></Navbar>
-      <div className="md:hidden">
+      <div className="md:block lg:hidden">
         <Outlet />
       </div>
     </>

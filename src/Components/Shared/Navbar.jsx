@@ -1,7 +1,12 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Sidebar from "../Common/Sidebar";
+import ChatList from "../Common/ChatList";
+
 
 const Navbar = () => {
+  const location = useLocation();
+
+
   return (
     <>
       <div className="drawer">
@@ -32,15 +37,21 @@ const Navbar = () => {
             </div>
             <div className="mx-2 flex-1 px-2 font-bold ">Telegram</div>
             <div className="hidden flex-none lg:block">
-              <ul className="menu menu-horizontal">
-                {/* Navbar menu content here */}
-       
-              </ul>
+            
             </div>
           </div>
           {/* Page content here */}
-          <div className="hidden md:block">
-            <Outlet />
+          <div className="flex max-h-screen">
+            <div className="hidden lg:block w-[350px]">
+              <ChatList />
+            </div>
+            <div
+              className={`w-full hidden lg:${
+                location.pathname == "/" ? "hidden" : "block"
+              }`}
+            >
+              <Outlet />
+            </div>
           </div>
         </div>
         <div className="drawer-side">

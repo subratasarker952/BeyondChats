@@ -1,5 +1,4 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
 import Profile from "../Pages/Profile";
 import Calls from "../Pages/Calls";
 import Contacts from "../Pages/Contacts";
@@ -11,6 +10,7 @@ import SendMessages from "../Pages/SendMessages";
 import Settings from "../Pages/Settings";
 import MainLayout from "../Layouts/MainLayout";
 import Messages from "../Pages/Messages";
+import ChatWindow from "../Components/Common/ChatWindow";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/messages",
         element: <Messages />,
+      },
+      {
+        path: "/messages/:id",
+        element: <ChatWindow />,
       },
       {
         path: "/profile",
